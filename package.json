@@ -1,0 +1,26 @@
+{
+  "name": "brad-api",
+  "version": "1.0.0",
+  "description": "Brad Course",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ObothA/brad-api.git"
+  },
+  "keywords": [
+    "api",
+    "express"
+  ],
+  "author": "Oboth Abel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ObothA/brad-api/issues"
+  },
+  "homepage": "https://github.com/ObothA/brad-api#readme",
+  "devDependencies": {
+    "eslint": "^7.24.0"
+  }
+}
