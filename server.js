@@ -27,6 +27,12 @@ const server = http.createServer((req, res) => {
         status = 200;
         response.success = true;
         response.data = todos;
+      } else if (method === 'POST' && url === '/todos') {
+        const { id, text } = JSON.parse(body);
+        todos.push({ id, text });
+        status = 201;
+        response.success = true;
+        response.data = todos;
       }
 
       /** Custom headers start with X- */
