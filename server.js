@@ -1,35 +1,42 @@
 const http = require('http');
 
-const toDos = [
+const todos = [
   { id: 1, text: 'To Do one' },
   { id: 2, text: 'To Do Two' },
   { id: 3, text: 'To Do Three' },
 ];
 
 const server = http.createServer((req, res) => {
-  /** Custom headers start with X- */
-  res.writeHead(404, {
-    'Content-Type': 'application/json',
-    'X-Powered-By': 'Node.js',
-  });
-
+  const { method, url } = req;
   let body = [];
+
   req
     .on('data', (chunk) => {
       body.push(chunk);
     })
     .on('end', () => {
       body = Buffer.concat(body).toString();
-      console.log(body);
-    });
 
-  res.end(
-    JSON.stringify({
-      success: false,
-      error: 'Not Found.',
-      data: null,
-    })
-  );
+      let status = 404;
+      const response = {
+        success: false,
+        data: null,
+      };
+
+      if (method === 'GET' && url === '/todos') {
+        status = 200;
+        response.success = true;
+        response.data = todos;
+      }
+
+      /** Custom headers start with X- */
+      res.writeHead(status, {
+        'Content-Type': 'application/json',
+        'X-Powered-By': 'Node.js',
+      });
+
+      res.end(JSON.stringify(response));
+    });
 });
 
 const PORT = 5000;
