@@ -7,13 +7,17 @@ const toDos = [
 ];
 
 const server = http.createServer((req, res) => {
-  res.setHeader('Content-Type', 'application/json');
   /** Custom headers start with X- */
-  res.setHeader('X-Powered-By', 'Node.js');
+  res.writeHead(404, {
+    'Content-Type': 'application/json',
+    'X-Powered-By': 'Node.js',
+  });
+
   res.end(
     JSON.stringify({
-      success: true,
-      data: toDos,
+      success: false,
+      error: 'Not Found.',
+      data: null,
     })
   );
 });
