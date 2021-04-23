@@ -13,6 +13,8 @@ const server = http.createServer((req, res) => {
     'X-Powered-By': 'Node.js',
   });
 
+  console.log(req.headers.authorization);
+
   res.end(
     JSON.stringify({
       success: false,
