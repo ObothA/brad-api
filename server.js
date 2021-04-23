@@ -21,6 +21,7 @@ const server = http.createServer((req, res) => {
       const response = {
         success: false,
         data: null,
+        error: null,
       };
 
       if (method === 'GET' && url === '/todos') {
@@ -32,6 +33,7 @@ const server = http.createServer((req, res) => {
 
         if (!id || !text) {
           status = 400;
+          response.error = 'Please add id and text.';
         } else {
           todos.push({ id, text });
           status = 201;
