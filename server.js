@@ -19,7 +19,7 @@ const server = http.createServer((req, res) => {
       body.push(chunk);
     })
     .on('end', () => {
-      body = Buffer.concat(body);
+      body = Buffer.concat(body).toString();
       console.log(body);
     });
 
