@@ -7,8 +7,8 @@ dotenv.config({ path: './config/config.env' });
 const app = express();
 
 app.get('/', (req, res) => {
-  res.json({
-    name: 'Oboth',
+  res.status(400).json({
+    success: false,
   });
 });
 
