@@ -11,7 +11,23 @@ const Bootcamp = require('../models/Bootcamp');
  * @access Public
  */
 exports.getBootcamps = asyncHandler(async (req, res, next) => {
-  const bootcamps = await Bootcamp.find();
+  // sample url for query strings
+  // {{URL}}/api/v1/bootcamps?averageCost[lte]=10000 returns {averageCost:{$lte: 10000}}
+  //  from query param ?career[in]=Business express generates { careers: { in: 'Business' } }
+  let query;
+
+  console.log(req.query);
+
+  let queryStr = JSON.stringify(req.query);
+
+  queryStr = queryStr.replace(
+    /\b(gt|gte|lt|lte|in)\b/g,
+    (match) => `$${match}`
+  );
+
+  query = Bootcamp.find(JSON.parse(queryStr));
+
+  const bootcamps = await query;
 
   res.status(200).json({
     success: true,
@@ -123,7 +139,7 @@ exports.getBootcampsInRadius = asyncHandler(async (req, res, next) => {
   // Calc radius using radians
   // Divide distance by radius of Earth
   // Earth Radius = 3,963 mi or 6,378 km
-  const radius = distance / 3963;
+  const radius = distance / 3963; // using miles because the division was by miles. divid by km to get km
   const bootcamps = await Bootcamp.find({
     location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } },
   });
