@@ -159,13 +159,16 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
  * @access Private
  */
 exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
-  const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id);
+  const bootcamp = await Bootcamp.findById(req.params.id);
 
   if (!bootcamp) {
     return next(
       new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
     );
   }
+
+  // This method triggers our "pre" middleware
+  bootcamp.remove();
 
   res.status(200).json({
     success: true,
