@@ -7,3 +7,5 @@ Courses populate their corresponding bootcamp while bootcamps reverse populate t
 Use a mongoose "pre" hooks to delete courses that belong to a bootcamp if the bootcamp is being deleted
 
 Full CRUD operations on bootcamps and courses.
+
+Use an aggregator to get average of courses on a bootcamp.
