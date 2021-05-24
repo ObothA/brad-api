@@ -61,6 +61,9 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
+// Prevent http param pollution
+app.use(hpp());
+
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
