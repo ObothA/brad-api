@@ -33,7 +33,7 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
  */
 exports.getCourse = asyncHandler(async (req, res, next) => {
   const course = await Course.findById(req.params.id).populate({
-    path: 'bootcamp',
+    path: 'bootcamp', // the bootcamp field in the Course model
     select: 'name description',
   });
 

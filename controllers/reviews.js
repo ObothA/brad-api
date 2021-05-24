@@ -26,7 +26,7 @@ exports.getReviews = asyncHandler(async (req, res, next) => {
 // @access    Public
 exports.getReview = asyncHandler(async (req, res, next) => {
   const review = await Review.findById(req.params.id).populate({
-    path: 'bootcamp',
+    path: 'bootcamp', // the bootcamp key in the review model
     select: 'name description',
   });
 
