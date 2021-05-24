@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const colors = require('colors');
 const fileupload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 /** Security */
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
@@ -60,6 +61,9 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
+
+// Enable cors
+app.use(cors());
 
 // Prevent http param pollution
 app.use(hpp());
